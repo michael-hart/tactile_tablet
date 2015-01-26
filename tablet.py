@@ -15,8 +15,14 @@ def main():
 	for pin in led_pins:
 		GPIO.setup(pin, GPIO.OUT)
 	atexit.register(cleanup)
+	print "Enter sentences for Braille display"
 	while True:
-		pass
+		display_str = raw_input('')
+		for c in display_str:
+			display_character(c)
+			time.sleep(0.5)
+		# Clear single character display
+		display_character(' ')
 
 def cleanup():
 	print "Cleaning up..."
@@ -25,12 +31,15 @@ def cleanup():
 def display_character(c):
 	""" Given a character, c, displays the Braille equivalent on
 	the LEDs with the global pin values. """
-	pass
+	assert type(c) == str and len(c) == 1
+	for pin, val in zip(led_pins, char_to_braille(c)):
+		GPIO.output(pin, val)
 
 def char_to_braille(c):
 	""" Given a character, c, returns a list of six bool values
 	for display on the LEDs """
-	pass
+	assert type(c) == str and len(c) == 1
+	return [True]*6
 
 if __name__ == '__main__':
 	main()
