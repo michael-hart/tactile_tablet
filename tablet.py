@@ -22,6 +22,16 @@ def cleanup():
 	print "Cleaning up..."
 	GPIO.cleanup()
 
+def display_character(c):
+	""" Given a character, c, displays the Braille equivalent on
+	the LEDs with the global pin values. """
+	pass
+
+def char_to_braille(c):
+	""" Given a character, c, returns a list of six bool values
+	for display on the LEDs """
+	pass
+
 if __name__ == '__main__':
 	main()
 
