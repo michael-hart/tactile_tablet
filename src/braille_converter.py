@@ -9,17 +9,16 @@ def convert_string(s):
 	assert type(s) == str
 	# Split by space is default
 	words = s.split()
-	characters = []
+	braille_words = []
 
 	for word in words:
+		braille_words.append([])
 		# Check for numbers using regex
 		if not number_pattern.match(word) is None:
 			# TODO: Found a number. Convert to use number braille
 			pass
 
 		for c in word:
-			characters += bdict[c]
-		# Join words with spaces
-		characters += bdict[' ']
+			braille_words[-1] += bdict[c]
 
-	return characters
+	return braille_words
