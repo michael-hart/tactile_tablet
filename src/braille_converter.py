@@ -1,4 +1,4 @@
-import braille_dict as bdict
+from braille_dict import braille_dict as bdict
 import re
 
 number_pattern = re.compile('.*\d.*')

@@ -2,7 +2,7 @@
 # Contains a single variable, braille_dict, which can be used for the 
 # conversion between braille characters and Braille lights
 # Nested lists allow for single list return values for all characters
-from string import lowercase
+from string import lower
 
 braille_dict = {
 	# Lower case alphabet
@@ -57,7 +57,7 @@ braille_dict = {
 }
 
 # Capital Letters
-for upper, lower in zip('ABCDEFGHIJKLMNOPQRSTUVWXYZ', lowercase('ABCDEFGHIJKLMNOPQRSTUVWXYZ')):
+for upper, lower in zip('ABCDEFGHIJKLMNOPQRSTUVWXYZ', lower('ABCDEFGHIJKLMNOPQRSTUVWXYZ')):
 	braille_dict[upper] = braille_dict['capital'] + braille_dict[lower]
 
 # Numbers
