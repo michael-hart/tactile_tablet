@@ -5,8 +5,9 @@ Created on 9 Feb 2015
 '''
 
 from braille_dict import braille_dict as bdict
-from RPi.GPIO import GPIO
+import RPi.GPIO as GPIO
 import atexit
+import itertools
 
 # Set value for each row
 row_pins = [8, 10, 12, 16, 18, 22, 24, 26, 23]
@@ -49,9 +50,11 @@ def main():
     while True:
         for col_pin in column_pins:
             GPIO.output(col_pin, GPIO.HIGH)
-            for row_pin, val in zip(row_pins, column_dict[col_pin]):
+            for row_pin, val in itertools.izip(row_pins, column_dict[col_pin]):
                 GPIO.output(row_pin, val)
             GPIO.output(col_pin, GPIO.LOW)
+	    for row_pin in row_pins:
+		GPIO.output(row_pin, GPIO.HIGH)
         
 def cleanup():
     print "Cleaning up..."
