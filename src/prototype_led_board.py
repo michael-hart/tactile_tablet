@@ -8,6 +8,7 @@ from braille_dict import braille_dict as bdict
 import RPi.GPIO as GPIO
 import atexit
 import itertools
+import sys
 
 # Set value for each row
 row_pins = [8, 10, 12, 16, 18, 22, 24, 26, 23]
@@ -27,10 +28,22 @@ def main():
         GPIO.output(pin, GPIO.LOW)
     atexit.register(cleanup)
     
-    buf = [ 
-       [bdict['a'][0], bdict['b'][0]],
-       [bdict['c'][0], bdict['d'][0]], 
-       [bdict['e'][0], bdict['f'][0]] ]
+    input_str = ""
+
+    if len(sys.argv != 2):
+        print "Usage: <prototype_led_board.py <characters>"
+        print "Second argument is a 6-character string, all lower case"
+        print "Defaulting to abcdef"
+        input_str = "abcdef"
+    else:
+        try:
+            input_str = lower(sys.argv) + "abcdef"
+            input_str = input_str[0:6]
+        except:
+            print "Unexpected characters in given string. Defaulting to abcdef"
+            input_str = "abcdef"
+
+    buf = [bdict[c][0] for c in input_str]
     
     column_dict = {}
     for col, col_pin in enumerate(column_pins):
